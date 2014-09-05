@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Bounce.Framework {
     public class TaskMethod : ITask {
@@ -17,6 +15,25 @@ namespace Bounce.Framework {
 
         public string Name {
             get { return Method.Name; }
+        }
+
+        public string Command {
+            get {
+                return Attribute.GetCustomAttributes(Method)
+                    .OfType<TaskAttribute>()
+                    .Select(current => current.Command)
+                    .FirstOrDefault();
+            }
+        }
+
+        public string Description {
+            get
+            {
+                return Attribute.GetCustomAttributes(Method)
+                    .OfType<TaskAttribute>()
+                    .Select(current => current.Description)
+                    .FirstOrDefault();
+            }
         }
 
         public string FullName {

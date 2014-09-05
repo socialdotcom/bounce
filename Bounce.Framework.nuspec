@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Bounce</id>
+    <id>Bounce-SocialDotCom</id>
     <version>0.9.0</version>
-    <authors>Tim MacFarlane and contributors</authors>
+    <authors>Tim MacFarlane and contributors (extended by Social.com)</authors>
 	<language>en-GB</language>
     <owners>Tim MacFarlane and contributors</owners>
-    <licenseUrl>https://github.com/refractalize/bounce/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/refractalize/bounce</projectUrl>
+    <licenseUrl>https://github.com/socialdotcom/bounce/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/socialdotcom/bounce</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A new build framework for C# projects.</description>
     <tags>build CI deploy configuration</tags>
@@ -16,8 +16,7 @@
     </dependencies>
   </metadata>
   <files>
-	<file src="Bounce.Framework\bin\Debug\Bounce.Framework.dll" target="lib\net40" />
-	
+	<file src="Bounce.Framework\bin\Debug\Bounce.Framework.dll" target="lib\net40" />	
 	<file src="Bounce.Console\bin\Debug\Bounce.exe" target="tools\net40" />
 	<file src="Bounce.Console\bin\Debug\Bounce.exe.config" target="tools\net40" />
   </files>

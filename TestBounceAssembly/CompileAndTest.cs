@@ -9,7 +9,7 @@ namespace TestBounceAssembly
 {
     public class CompileAndTest
     {
-        [Task]
+        [Task(Command = "compile:test", Description = "Comiples and tests the Bounce.sln solution")]
         public void Compile() {
             var vs = new VisualStudio(new Shell(Log.Default));
             var sln = vs.Solution("Bounce.sln");

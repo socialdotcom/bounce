@@ -18,6 +18,12 @@ namespace Bounce.Framework.Tests {
         }
 
         [Test]
+        public void FindsTaskCommand() {
+            var task = new TaskMethod(typeof(FakeTaskClass).GetMethod("Compile"), Resolver);
+            Assert.That(task.Command, Is.EqualTo("test:compile"));
+        }
+
+        [Test]
         public void InvokesTaskMethodWithNoParameters()
         {
             var task = new TaskMethod(typeof (FakeTaskClass).GetMethod("Compile"), Resolver);
@@ -78,7 +84,6 @@ namespace Bounce.Framework.Tests {
             Assert.That(() => task.Invoke(new TaskParameters(new Dictionary<string, string>())), Throws.InstanceOf<TaskRequiredParameterException>());
         }
 
-
         [Test]
         public void ThrowsExceptionWhenCustomTypeCannotBeParsed()
         {
@@ -100,7 +105,7 @@ namespace Bounce.Framework.Tests {
 
         public class FakeTaskClass
         {
-            [Task]
+            [Task(Command = "test:compile")]
             public void Compile()
             {
                 Output.WriteLine("compiling");

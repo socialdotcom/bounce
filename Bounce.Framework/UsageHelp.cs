@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -9,7 +8,8 @@ namespace Bounce.Framework {
             foreach (var task in tasks)
             {
                 writer.WriteLine();
-                writer.WriteLine("    " + task.FullName);
+                writer.WriteLine("    {0} ({1})", task.FullName, task.Command);
+                if (task.Description != null) writer.WriteLine("    " + task.Description);
 
                 foreach (var parameter in task.Parameters)
                 {

@@ -4,29 +4,21 @@ using System.Linq;
 namespace Bounce.Framework {
     public class TaskRunner : ITaskRunner {
         public void RunTask(string taskName, TaskParameters taskParameters, IEnumerable<ITask> tasks) {
-            var matchingTasks = tasks.Where(t => AllTaskNames(t).Contains(taskName.ToLower())).ToArray();
+            
+            var matchingTasksByCommand = tasks.Where(t => AllTaskCommands(t).Contains(taskName.ToLower())).ToArray();
 
-            if (matchingTasks.Count() > 1) {
-                throw new AmbiguousTaskNameException(taskName, matchingTasks);
-            } else if (!matchingTasks.Any()) {
+            if (matchingTasksByCommand.Count() > 1) {
+                throw new AmbiguousTaskNameException(taskName, matchingTasksByCommand);
+            } else if (!matchingTasksByCommand.Any()) {
                 throw new NoMatchingTaskException(taskName, tasks);
             } else {
-                matchingTasks.Single().Invoke(taskParameters);
+                matchingTasksByCommand.Single().Invoke(taskParameters);
             }
         }
 
-        public IEnumerable<string> AllTaskNames(ITask task)
+        public IEnumerable<string> AllTaskCommands(ITask task)
         {
-            var fullName = task.FullName.ToLower();
-
-            yield return fullName;
-            int index = fullName.IndexOf(".");
-            while (index > 0)
-            {
-                fullName = fullName.Substring(index + 1);
-                yield return fullName;
-                index = fullName.IndexOf(".");
-            }
+            yield return task.Command.ToLower();
         }
     }
 }
